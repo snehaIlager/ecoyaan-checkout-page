@@ -254,5 +254,5 @@ This project demonstrates a clean implementation of a checkout flow using Next.j
 
 
 
-Live Demo: https://your-project.vercel.app
+Live Demo: https://ecoyaan-checkout-page.vercel.app/cart
 
