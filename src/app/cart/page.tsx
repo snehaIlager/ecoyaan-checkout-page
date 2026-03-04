@@ -2,15 +2,25 @@ import { CartResponse } from "@/src/types/cart"
 import CartItem from "@/src/components/CartItem"
 import OrderSummary from "@/src/components/OrderSummary"
 import Link from "next/link"
+import { headers } from "next/headers"
 
 /*
-Fetch cart data on the server
-This satisfies the SSR requirement
+Fetch cart data on the server.
+This satisfies the SSR requirement.
 */
 
 async function getCart(): Promise<CartResponse> {
 
-  const res = await fetch("/api/cart", {
+  const headersList = await headers()
+  const host = headersList.get("host")
+
+  // Determine protocol depending on environment
+  const protocol =
+    process.env.NODE_ENV === "development"
+      ? "http"
+      : "https"
+
+  const res = await fetch(`${protocol}://${host}/api/cart`, {
     cache: "no-store",
   })
 
@@ -26,7 +36,7 @@ export default async function CartPage() {
   const data = await getCart()
 
   /*
-  Calculate subtotal safely
+  Calculate subtotal
   */
 
   const subtotal = data.cartItems.reduce(
