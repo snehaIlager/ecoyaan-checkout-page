@@ -10,7 +10,7 @@ This satisfies the SSR requirement
 
 async function getCart(): Promise<CartResponse> {
 
-  const res = await fetch("http://localhost:3000/api/cart", {
+  const res = await fetch("/api/cart", {
     cache: "no-store",
   })
 
